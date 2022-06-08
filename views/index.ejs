@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="/request" method="post" id="myForm">
+        <input type="text" name="devname" id="devname">
+        <button id="submitBtn" type="submit">Create Node</button>
+    </form>
+
+
+
+
+    <script>
+        const submitBtn = document.getElementById('submitBtn');
+        const devname = document.getElementById('devname');
+        const myForm = document.getElementById('myForm');
+
+        submitBtn.addEventListener('click', async (e) => {
+            e.preventDefault();
+            const formdata = new FormData(myForm);
+            const res = await fetch('/request', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify({ formdata })
+            });
+            const data = await res.json();
+            console.log(data)
+        })
+    </script>
+</body>
+
+</html>
